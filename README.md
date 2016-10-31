@@ -1,0 +1,2 @@
+# Othello
+An othello engine
