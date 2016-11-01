@@ -5,7 +5,7 @@
 
 void printBitboard(bboard board)
 {
-	printf("%s\n",line);
+	printf("%s\n",LINE);
 	for(int i=7;i>=0;i--)
 	{
 		for(int u=0;u<8;u++)
@@ -23,13 +23,13 @@ void printBitboard(bboard board)
 			}
 			printf(" ");
 		}
-		printf("|\n%s\n",line);
+		printf("|\n%s\n",LINE);
 	}
 }
 
 void printBoard(Board* board)
 {
-	printf("%s\n",line);
+	printf("%s\n",LINE);
 	for(int i=7;i>=0;i--)
 	{
 		for(int u=0;u<8;u++)
@@ -51,7 +51,7 @@ void printBoard(Board* board)
 			}
 			printf(" ");
 		}
-		printf("|\n%s\n",line);
+		printf("|\n%s\n",LINE);
 	}
 }
 
@@ -93,6 +93,11 @@ void generateWhiteMoves(Board* board)
 	}
 }
 
+void placeWhitePiece(Board* board, bboard piece)
+{	
+	
+}
+
 void setupDefaultBoard(Board* board)
 {
 	board->white = 0;
@@ -103,27 +108,4 @@ void setupDefaultBoard(Board* board)
 }
 
 
-int testBoard()
-{
-	Board* board = (Board*)malloc(sizeof(Board));
-	setupDefaultBoard(board);
-	printBoard(board);
-	generateWhiteMoves(board);
-	free(board);
-	
-	return 0;
-}
-
-int main(int argc, char** argv)
-{
-	int result = testBoard();
-	if(result != 0)
-	{
-		printf("FAIL!\n");
-	}
-	else
-	{
-		printf("PASS!\n");
-	}
-}
 
