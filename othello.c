@@ -1,43 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-
-#define PIECE(pos) (1ULL << pos)
-
-//  +---+---+---+---+---+---+---+---+
-//8 | 56| 57| 58| 59| 60| 61| 62| 63|
-//  +---+---+---+---+---+---+---+---+
-//7 | 48| 49| 50| 51| 52| 53| 54| 55|
-//  +---+---+---+---+---+---+---+---+
-//6 | 40| 41| 42| 43| 44| 45| 46| 47|
-//  +---+---+---+---+---+---+---+---+
-//5 | 32| 33| 34| 35| 36| 37| 38| 39|
-//  +---+---+---+---+---+---+---+---+
-//4 | 24| 25| 26| 27| 28| 29| 30| 31|
-//  +---+---+---+---+---+---+---+---+
-//3 | 16| 17| 18| 19| 20| 21| 22| 23|
-//  +---+---+---+---+---+---+---+---+
-//2 | 8 | 9 | 10| 11| 12| 13| 14| 15|
-//  +---+---+---+---+---+---+---+---+
-//1 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
-//  +---+---+---+---+---+---+---+---+
-//    1   2   3   4   5   6   7   8
-
-const char* line = "+---+---+---+---+---+---+---+---+";
-
-typedef uint64_t bboard;
-
-typedef struct struct_board
-{
-	bboard white;
-	bboard black;
-}Board;
-
-typedef struct struct_Move
-{
-	Board new;
-	Board old;
-}Move;
+#include "othello.h"
 
 void printBitboard(bboard board)
 {
@@ -98,7 +62,35 @@ void generateBlackMoves(Board* board)
 
 void generateWhiteMoves(Board* board)
 {
-	
+	Board oldBoard = *board;
+	for(int i=0;i<64;i++)
+	{
+		Board newBoard = oldBoard;
+		bboard addedPiece = PIECE(i);
+		bboard convertedPieces = 0;
+		int found = 0;
+		
+		//Test west direction
+		while(addedPiece)
+		{
+			//Shift piece one step west
+			addedPiece = addedPiece >> 1;
+			if(addedPiece & oldBoard.white)
+			{
+				addedPiece = 0;
+				if(convertedPieces != 0)
+					found = 1;
+			}
+			addedPiece &= oldBoard.black & (~RIGHTSIDE);
+			convertedPieces |= addedPiece;
+		}
+		if(found)
+		{
+			newBoard.black &= ~convertedPieces;
+			newBoard.white |= convertedPieces | PIECE(i);
+			printBoard(&newBoard);
+		}
+	}
 }
 
 void setupDefaultBoard(Board* board)
@@ -110,11 +102,28 @@ void setupDefaultBoard(Board* board)
 	board->black |= PIECE(27) | PIECE(36);
 }
 
-int main(int argc, char** argv)
+
+int testBoard()
 {
 	Board* board = (Board*)malloc(sizeof(Board));
 	setupDefaultBoard(board);
 	printBoard(board);
+	generateWhiteMoves(board);
 	free(board);
+	
+	return 0;
+}
+
+int main(int argc, char** argv)
+{
+	int result = testBoard();
+	if(result != 0)
+	{
+		printf("FAIL!\n");
+	}
+	else
+	{
+		printf("PASS!\n");
+	}
 }
 
