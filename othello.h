@@ -40,13 +40,13 @@ typedef struct struct_board
 
 typedef struct struct_Move
 {
-	Board new;
-	Board old;
+	Board newBoard;
+	Board oldBoard;
 }Move;
 
 void printBitboard(bboard board);
 void printBoard(Board* board);
-void placeWhitePiece(Board* board,bboard piece);
+int placeWhitePiece(Board* board,bboard piece);
 void setupDefaultBoard(Board* board);
 
 #endif
