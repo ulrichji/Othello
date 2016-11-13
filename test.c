@@ -63,7 +63,7 @@ int test_place_white_piece_left_legal()
 	int result = 0;
 	Board b1 = constructBoard(2,4,35,28,27,36);
 	
-	placeWhitePiece(&b1,PIECE(26));
+	placePiece(&b1, PIECE(26), WHITE);
 	result |= compareBoards(b1,constructBoard(4,5,26,27,28,35));
 	
 	Board b2 = constructBoard(1,7,7,1,2,3,4,5,6);

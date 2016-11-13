@@ -3,6 +3,9 @@
 
 #include <stdint.h>
 
+#define WHITE 1
+#define BLACK 2
+
 #define PIECE(pos) (1ULL << pos)
 
 #define LEFTSIDE (PIECE(0) | PIECE(8) | PIECE(16) | PIECE(24) | PIECE(32) | PIECE(40) | PIECE(48) | PIECE(56))
@@ -46,7 +49,7 @@ typedef struct struct_Move
 
 void printBitboard(bboard board);
 void printBoard(Board* board);
-int placeWhitePiece(Board* board,bboard piece);
+int placePiece(Board* board, bboard piece, int side);
 void setupDefaultBoard(Board* board);
 
 #endif

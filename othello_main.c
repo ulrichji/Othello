@@ -8,7 +8,7 @@ int main(int argc, char** argv)
 	setupDefaultBoard(board);
 	printBoard(board);
 	
-	int res = placeWhitePiece(board,PIECE(49));
+	int res = placePiece(board,PIECE(21),BLACK);
 	
 	printf("res: %d\n",res);
 	

@@ -62,7 +62,7 @@ void generateBlackMoves(Board* board)
 
 void generateWhiteMoves(Board* board)
 {
-	Board oldBoard = *board;
+	/*Board oldBoard = *board;
 	for(int i=0;i<64;i++)
 	{
 		Board newBoard = oldBoard;
@@ -90,19 +90,32 @@ void generateWhiteMoves(Board* board)
 			newBoard.white |= convertedPieces | PIECE(i);
 			printBoard(&newBoard);
 		}
-	}
+	}*/
 }
 
-int placeWhitePiece(Board* board, bboard piece)
+int placePiece(Board* board, bboard piece, int side)
 {
 	bboard convertedPieces = 0ULL;
 	bboard tempConverted = 0ULL;
 	bboard testPiece = piece;
-	//Special case
-	bboard enemies = board->black;
-	bboard empty = ~(board->black | board->white);
-	bboard friends = board->white;
-	//end special case
+	
+	bboard enemies = 0;
+	bboard empty = 0;
+	bboard friends = 0;
+	
+	if(side == WHITE)
+	{
+		enemies = board->black;
+		empty = ~(board->black | board->white);
+		friends = board->white;
+	}
+	else if(side == BLACK)
+	{
+		enemies = board->white;
+		empty = ~(board->black | board->white);
+		friends = board->black;
+	}
+	
 	int found = 0;
 	
 	//Find pieces west
@@ -282,10 +295,16 @@ int placeWhitePiece(Board* board, bboard piece)
 	if(convertedPieces != 0)
 		convertedPieces |= piece;
 	
-	//Special case
-	board->white |= convertedPieces;
-	board->black &= ~convertedPieces;
-	//end special case
+	if(side == WHITE)
+	{
+		board->white |= convertedPieces;
+		board->black &= ~convertedPieces;
+	}
+	else if(side == BLACK)
+	{
+		board->white &= ~convertedPieces;
+		board->black |= convertedPieces;
+	}
 	
 	if(convertedPieces == 0)
 		return 1;
