@@ -6,6 +6,9 @@
 #define WHITE 1
 #define BLACK 2
 
+#define BOARD_WIDTH 8
+#define BOARD_HEIGHT 8
+
 #define PIECE(pos) (1ULL << pos)
 
 #define LEFTSIDE (PIECE(0) | PIECE(8) | PIECE(16) | PIECE(24) | PIECE(32) | PIECE(40) | PIECE(48) | PIECE(56))

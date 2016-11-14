@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "othello.h"
+#include "console_player.h"
 
 int main(int argc, char** argv)
 {
@@ -8,9 +9,30 @@ int main(int argc, char** argv)
 	setupDefaultBoard(board);
 	printBoard(board);
 	
-	int res = placePiece(board,PIECE(21),BLACK);
+	int turn = WHITE;
 	
-	printf("res: %d\n",res);
+	for(int i=0;i<10;i++)
+	{
+		if(turn == WHITE)
+			turn = BLACK;
+		else
+			turn = WHITE;
+		
+		int result = 1;
+		while(result != 0)
+		{
+			bboard placement = getConsolePlayerPlacement();
+			result = placePiece(board, placement, turn);
+			if(result != 0)
+			{
+				printf("That move is not legal!\n");
+			}
+		}
+	}
+	
+	//int res = placePiece(board,PIECE(21),BLACK);
+	
+	//printf("res: %d\n",res);
 	
 	printBoard(board);
 	

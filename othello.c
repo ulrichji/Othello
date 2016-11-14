@@ -2,6 +2,57 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include "othello.h"
+#include "console_player.h"
+
+char rowValue(int row)
+{
+	switch(row)
+	{
+	case 0:
+		return '1';
+	case 1:
+		return '2';
+	case 2:
+		return '3';
+	case 3:
+		return '4';
+	case 4:
+		return '5';
+	case 5:
+		return '6';
+	case 6:
+		return '7';
+	case 7:
+		return '8';
+	}
+	
+	return '=';
+}
+
+char value(int col)
+{
+	switch(col)
+	{
+	case 0:
+		return 'a';
+	case 1:
+		return 'b';
+	case 2:
+		return 'c';
+	case 3:
+		return 'd';
+	case 4:
+		return 'e';
+	case 5:
+		return 'f';
+	case 6:
+		return 'g';
+	case 7:
+		return 'h';
+	}
+	
+	return '0';
+}
 
 void printBitboard(bboard board)
 {
@@ -29,9 +80,10 @@ void printBitboard(bboard board)
 
 void printBoard(Board* board)
 {
-	printf("%s\n",LINE);
+	printf("   %s\n",LINE);
 	for(int i=7;i>=0;i--)
 	{
+		printf("%c  ",rowValue(i));
 		for(int u=0;u<8;u++)
 		{
 			bboard index = (i*8) + u;
@@ -51,8 +103,9 @@ void printBoard(Board* board)
 			}
 			printf(" ");
 		}
-		printf("|\n%s\n",LINE);
+		printf("|\n   %s\n",LINE);
 	}
+	printf("     a   b   c   d   e   f   g   h\n");
 }
 
 void generateBlackMoves(Board* board)
@@ -316,8 +369,8 @@ void setupDefaultBoard(Board* board)
 	board->white = 0;
 	board->black = 0;
 	
-	board->white |= PIECE(35) | PIECE(28) | PIECE(26) | PIECE(44) | PIECE(45);
-	board->black |= PIECE(27) | PIECE(36) | PIECE(42) | PIECE(37);
+	board->white |= PIECE(35) | PIECE(28);// | PIECE(26) | PIECE(44) | PIECE(45);
+	board->black |= PIECE(27) | PIECE(36);// | PIECE(42) | PIECE(37);
 }
 
 
