@@ -74,8 +74,9 @@ bboard getConsolePlayerPlacement(void)
 		else
 		{
 			validPlacement = 0;
-			placement = (1ULL << (bboard)((row * BOARD_WIDTH) + row));
+			placement = (1ULL << (bboard)((row * BOARD_WIDTH) + col));
 		}
+		printf("Move to %d,%d\n", row, col);
 	}
 	
 	return placement;

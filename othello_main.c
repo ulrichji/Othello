@@ -7,12 +7,12 @@ int main(int argc, char** argv)
 {
 	Board* board = (Board*)malloc(sizeof(Board));
 	setupDefaultBoard(board);
-	printBoard(board);
 	
 	int turn = WHITE;
 	
 	for(int i=0;i<10;i++)
 	{
+		printBoard(board);
 		if(turn == WHITE)
 			turn = BLACK;
 		else
