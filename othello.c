@@ -108,44 +108,6 @@ void printBoard(Board* board)
 	printf("     a   b   c   d   e   f   g   h\n");
 }
 
-void generateBlackMoves(Board* board)
-{
-
-}
-
-void generateWhiteMoves(Board* board)
-{
-	/*Board oldBoard = *board;
-	for(int i=0;i<64;i++)
-	{
-		Board newBoard = oldBoard;
-		bboard addedPiece = PIECE(i);
-		bboard convertedPieces = 0;
-		int found = 0;
-		
-		//Test west direction
-		while(addedPiece)
-		{
-			//Shift piece one step west
-			addedPiece = addedPiece >> 1;
-			if(addedPiece & oldBoard.white)
-			{
-				addedPiece = 0;
-				if(convertedPieces != 0)
-					found = 1;
-			}
-			addedPiece &= oldBoard.black & (~RIGHTSIDE);
-			convertedPieces |= addedPiece;
-		}
-		if(found)
-		{
-			newBoard.black &= ~convertedPieces;
-			newBoard.white |= convertedPieces | PIECE(i);
-			printBoard(&newBoard);
-		}
-	}*/
-}
-
 int placePiece(Board* board, bboard piece, int side)
 {
 	bboard convertedPieces = 0ULL;
